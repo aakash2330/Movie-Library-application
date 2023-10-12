@@ -1,0 +1,13 @@
+.glitchText{
+    transition: all .4s ease-in-out;
+    overflow: hidden;
+    color: white;
+    font-size: x-large;
+    font-family: 'Space Mono', monospace;
+}
+
+.glitchText:hover{
+    background-color: #c0fb50;
+    color: black;
+    
+}
