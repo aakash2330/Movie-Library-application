@@ -6,12 +6,11 @@ import { Input } from "@/components/ui/input"
 import { formAttributesType, formSchema, formType } from "@/types/formTypes"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import axios from "axios"
 
 
 
 export default function AddMoviesPage(){
-
-
 
     const form = useForm<formType>({
         resolver: zodResolver(formSchema), //default values for the form
@@ -23,10 +22,11 @@ export default function AddMoviesPage(){
       })
 
 
-  function onFormSubmit(values: formType){
-    console.log(values)
+  async function onFormSubmit(values: formType){
+    //post request to save movie in db
+    const {data} = await axios.post("http://localhost:3001/movie/add",values)  
+    console.log(data)
   }
-
 
   const formAttributes:formAttributesType[] = [{
     name:"movieName",
@@ -41,12 +41,13 @@ export default function AddMoviesPage(){
   },{
     name:"rating",
     label:"Rating",
-    placeholder:"x/10",
+    placeholder:"",
     description:"Rating out of 10"
   }]
 
 
     return(<div className="flex flex-col h-screen items-center justify-center">
+      <div className="w-[20rem]">
         <Form  {...form}>
           <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8">
             {formAttributes.map((formfield,index)=>{
@@ -72,6 +73,7 @@ export default function AddMoviesPage(){
             <Button type="submit">Submit</Button>
           </form>
         </Form>
+        </div>
         </div>
       )
 }

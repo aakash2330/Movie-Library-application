@@ -14,28 +14,40 @@ import './sidenav.css';
 import { grey } from '@mui/material/colors';
 // import BugLogo from '../buGamersLogo/bugLogo';
 import Glitch from '../glitch/glitch';
-import {Link,BrowserRouter} from 'react-router-dom'
 import { Button } from '../button';
 import Image from 'next/image';
 import menuIcon from "./icons8-menu-64.png"
+import Link from 'next/link'
 
 export default function TemporaryDrawer() {
 
  
   const [navMenuState,setNavMenuState]=React.useState([
-    'GALLERY','ADD MOVIES'
-  ])
+    {
+      title:'HOME',
+      page:'/'
+    },
+    {
+    title:'GALLERY',
+    page:'/movies-list'
+  },
+  {
 
-  const [usernameState,setUsernameState] = React.useState("")
+    title:'ADD-MOVIES',
+    page:'/add-movies'
+  },
+  {
+    title:'DOWNLOAD LIST',
+    page:'/download'
+  },
+
+  
+  ])
 
 
   const [state, setState] = React.useState({
     left: false,
   });
-
-  const handleLogout = ()=>{
-    window.location.href = "/home";
-  }
 
   const toggleDrawer = (anchor:any, open:any) => (event:any) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -56,23 +68,15 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
 
-      <List>
-        <ListItemText style={{fontWeight:"bold"}} onClick={()=>{
-            //navigation here
-            }} ><Glitch GlitchText={usernameState}></Glitch>
-      </ListItemText> 
-      :
-      <></>}
-      
-
-        {navMenuState.map((text, index) => (
-          <ListItem key={text} disablePadding>
+      <List>   
+         {navMenuState.map((text, index) => (
+          <ListItem key={text.title} disablePadding>
             <ListItemButton>
             {/* <ListItemText ><h1>{text}</h1></ListItemText> */}
             
             <ListItemText style={{fontWeight:"bold"}} onClick={()=>{
              
-            }} ><Glitch GlitchText={text}></Glitch></ListItemText>
+            }}><Link href={text.page}><Glitch GlitchText={text.title}></Glitch></Link></ListItemText>
             </ListItemButton>
           </ListItem>
         ))}
@@ -80,7 +84,7 @@ export default function TemporaryDrawer() {
       <Divider />
       <Divider />
       <List>
-        {['DOWNLOAD LIST'].map((text, index) => (
+        {[].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemText><Glitch GlitchText={text}></Glitch></ListItemText>

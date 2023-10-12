@@ -1,72 +1,13 @@
 import { formType } from "@/types/formTypes"
 import {  columns } from "./colums"
 import { DataTable } from "./data-table"
+import axios from "axios"
 
 async function getData(): Promise<formType[]> {
-  // Fetch data from your API here.
-  return [
-    {
-        movieName:"name1",
-        duration:"duration1",
-        rating:"rating1"
-    },
-    {
-        movieName:"name2",
-        duration:"duration2",
-        rating:"rating2"
-    },
-    {
-        movieName:"name3",
-        duration:"duration3",
-        rating:"rating3"
-    },
-    {
-        movieName:"name1",
-        duration:"duration1",
-        rating:"rating1"
-    },
-    {
-        movieName:"name2",
-        duration:"duration2",
-        rating:"rating2"
-    },
-    {
-        movieName:"name3",
-        duration:"duration3",
-        rating:"rating3"
-    },
-    {
-        movieName:"name1",
-        duration:"duration1",
-        rating:"rating1"
-    },
-    {
-        movieName:"name2",
-        duration:"duration2",
-        rating:"rating2"
-    },
-    {
-        movieName:"name3",
-        duration:"duration3",
-        rating:"rating3"
-    },
-    {
-        movieName:"name1",
-        duration:"duration1",
-        rating:"rating1"
-    },
-    {
-        movieName:"name2",
-        duration:"duration2",
-        rating:"rating2"
-    },
-    {
-        movieName:"name3",
-        duration:"duration3",
-        rating:"rating3"
-    }
-    // ...
-  ]
+  // Fetch movie list here
+
+  const {data} = await axios.get("http://localhost:3001/movie/list");  
+  return data.movieList;
 }
 
 export default async function moviesListPage() {

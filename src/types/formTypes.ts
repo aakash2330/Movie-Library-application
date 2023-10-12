@@ -45,3 +45,10 @@ export type formAttributesType = {
     placeholder:string,
     description:string
 }
+
+
+export type movieDataType = {
+    movieName:string,
+    duration: number,
+    rating: number
+}
