@@ -34,7 +34,6 @@ export default function TemporaryDrawer() {
   });
 
   const handleLogout = ()=>{
-    localStorage.removeItem("token");localStorage.removeItem("username")
     window.location.href = "/home";
   }
 
@@ -58,7 +57,6 @@ export default function TemporaryDrawer() {
     >
 
       <List>
-        {localStorage.getItem("username")?
         <ListItemText style={{fontWeight:"bold"}} onClick={()=>{
             //navigation here
             }} ><Glitch GlitchText={usernameState}></Glitch>
@@ -120,7 +118,7 @@ export default function TemporaryDrawer() {
         </React.Fragment>
       ))} */}
         <React.Fragment key={"left"}>
-        <Image src={menuIcon} alt="SideMenuOpener"id="sideMenuOpener"  onClick={toggleDrawer("left", true)}/>
+        <Image src={menuIcon} alt="SideMenuOpener"id="sideMenuOpener"  onClick={toggleDrawer("left", true)} priority={true}/>
           <Drawer id='draw'
             open={state["left"]}
             onClose={toggleDrawer("left", false)}

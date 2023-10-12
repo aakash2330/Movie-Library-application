@@ -46,8 +46,8 @@ export default function AddMoviesPage(){
   }]
 
 
-    return(
-        <Form {...form}>
+    return(<div className="flex flex-col h-screen items-center justify-center">
+        <Form  {...form}>
           <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8">
             {formAttributes.map((formfield,index)=>{
               return  <FormField
@@ -68,10 +68,11 @@ export default function AddMoviesPage(){
               )}
             /> 
             })}
-                <br/>
+            <br/>
             <Button type="submit">Submit</Button>
           </form>
         </Form>
+        </div>
       )
 }
 

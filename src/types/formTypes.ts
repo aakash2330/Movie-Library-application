@@ -28,13 +28,13 @@ export const formSchema = z.object({
 ,
     rating: z.string().refine((rating)=>{
         try{
-            if(+rating>=1 && +rating<=10)return true;
+            if(+rating>=0 && +rating<=10)return true;
             return false
         }
         catch(error){
             return error;
         }
-    }, { message: "Rating should be between 1 and 10" })
+    }, { message: "Rating should be between 0 and 10" })
 })
 
 export type formType = z.infer<typeof formSchema>
