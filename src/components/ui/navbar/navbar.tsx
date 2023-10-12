@@ -122,7 +122,7 @@ export default function TemporaryDrawer() {
         </React.Fragment>
       ))} */}
         <React.Fragment key={"left"}>
-        <Image src={menuIcon} alt="SideMenuOpener"id="sideMenuOpener"  onClick={toggleDrawer("left", true)} priority={true}/>
+        <Image className='fixed' src={menuIcon} alt="SideMenuOpener"id="sideMenuOpener"  onClick={toggleDrawer("left", true)} priority={true}/>
           <Drawer id='draw'
             open={state["left"]}
             onClose={toggleDrawer("left", false)}

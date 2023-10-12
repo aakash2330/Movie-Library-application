@@ -15,7 +15,19 @@ import {
 import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow} from "@/components/ui/table"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
+import { useRecoilState } from "recoil";
+import { movieListAtom } from "@/store/atoms";
+ 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import axios from "axios";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -50,6 +62,13 @@ export function DataTable<TData, TValue>({
     },
   })
 
+  const [ratingFilterValue,setRatingFilterValue] = React.useState("")
+  const [movieListState , setMovieListState] = useRecoilState(movieListAtom)
+
+  async function getFilteredData(filter:string) {
+    const {data} = await axios.post("http://localhost:3001/movie/filterRating",{filter})
+    setMovieListState(data.movieList)
+  }
 
   return (
     <>
@@ -62,6 +81,24 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm text-center"
         />
+
+<Select onValueChange={(value)=>{
+
+getFilteredData(value)
+
+}}>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Filter rating" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="lessThanSeven">Rated less than 7</SelectItem>
+          <SelectItem value="greaterThanSeven">Rated more than 7</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+
       </div>
 
     
@@ -128,6 +165,8 @@ export function DataTable<TData, TValue>({
           Next
         </Button>
       </div>
+
+      {JSON.stringify(movieListState)}
     </>
   )
 }

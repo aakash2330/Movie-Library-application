@@ -72,7 +72,7 @@ h1 {
   #sideMenuOpener{
     color: white;
     left: 0px;
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     width: 3rem;
     /* background-color: green;
