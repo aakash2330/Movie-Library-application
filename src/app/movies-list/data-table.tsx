@@ -165,8 +165,8 @@ getFilteredData(value)
           Next
         </Button>
       </div>
-
-      {JSON.stringify(movieListState)}
+{/* 
+      {JSON.stringify(movieListState)} */}
     </>
   )
 }
