@@ -1,6 +1,7 @@
 "use client"
  
 import * as React from "react"
+import Image from 'next/image'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -28,6 +29,9 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import axios from "axios";
+
+
+import filterIcon from "../../icons/icons8-filter-50.png"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -63,17 +67,19 @@ export function DataTable<TData, TValue>({
   })
 
   const [ratingFilterValue,setRatingFilterValue] = React.useState("")
+  const [nameFilterValue,setnameFilterValue] = React.useState("")
   const [movieListState , setMovieListState] = useRecoilState(movieListAtom)
 
-  async function getFilteredData(filter:string) {
-    const {data} = await axios.post("http://localhost:3001/movie/filterRating",{filter})
+  async function getFilteredData() {
+    const {data} = await axios.post("http://localhost:3001/movie/filter",{ratingFilterValue,nameFilterValue})
     setMovieListState(data.movieList)
   }
 
   return (
     <>
-      <div className="flex items-center justify-between py-4">
-        <Input
+
+<div className="flex items-center justify-center py-4">
+      <Input 
           placeholder="Search moives..."
           value={(table.getColumn("movieName")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
@@ -81,12 +87,25 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm text-center"
         />
+        </div>
 
-<Select onValueChange={(value)=>{
 
-getFilteredData(value)
+      <div className="flex items-center justify-between py-4">
+      <Select onValueChange={(value)=>{setnameFilterValue(value)}}>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Filter Movie Names" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Movies</SelectLabel>
+          <SelectItem value="betweenAandM">A-M</SelectItem>
+          <SelectItem value="betweenMandZ">M-Z</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
 
-}}>
+
+<Select onValueChange={(value)=>{setRatingFilterValue(value)}}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Filter rating" />
       </SelectTrigger>
@@ -99,8 +118,11 @@ getFilteredData(value)
       </SelectContent>
     </Select>
 
-      </div>
 
+    <Button onClick={getFilteredData}><Image className='w-[1.5rem]' src={filterIcon} alt="SideMenuOpener" priority={true}/></Button>
+    </div>
+
+     
     
     <div className="rounded-md borderw text-center ">
       <Table>
@@ -165,6 +187,7 @@ getFilteredData(value)
           Next
         </Button>
       </div>
+   
 {/* 
       {JSON.stringify(movieListState)} */}
     </>
