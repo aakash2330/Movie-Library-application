@@ -28,7 +28,7 @@ export default function TemporaryDrawer() {
       page:'/'
     },
     {
-    title:'GALLERY',
+    title:'MOVIES LIST',
     page:'/movies-list'
   },
   {

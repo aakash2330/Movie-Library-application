@@ -37,6 +37,13 @@ export const formSchema = z.object({
     }, { message: "Rating should be between 0 and 10" })
 })
 
+
+
+export const editFormSchmea = formSchema.omit({ movieName: true });
+
+export type editFormSchmeaType = z.infer<typeof editFormSchmea>
+
+
 export type formType = z.infer<typeof formSchema>
 
 export type formAttributesType = {
@@ -44,6 +51,12 @@ export type formAttributesType = {
     label:string,
     placeholder:string,
     description:string
+}
+
+export type formAttributesTypeWithoutName = Omit<formAttributesType, 'name'>;
+
+export type EditformAttributesType=formAttributesTypeWithoutName & {
+    name:"duration" | "rating"
 }
 
 
