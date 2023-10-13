@@ -108,7 +108,7 @@ getFilteredData(value)
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead className="w-[33.33%] text-center"  key={header.id}>
+                  <TableHead className="w-[33.33%] text-center text-[#c0fb50]"  key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -146,7 +146,7 @@ getFilteredData(value)
       </Table>
     </div>
 
-    <div className="flex items-center justify-end space-x-2 py-4">
+    <div className="flex items-center justify-end space-x-2 py-4 text-[#c0fb50]">
         <Button
           variant="outline"
           size="sm"
