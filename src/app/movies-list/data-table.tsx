@@ -91,7 +91,7 @@ getFilteredData(value)
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
+          <SelectLabel>Movies</SelectLabel>
           <SelectItem value="lessThanSeven">Rated less than 7</SelectItem>
           <SelectItem value="greaterThanSeven">Rated more than 7</SelectItem>
         </SelectGroup>
