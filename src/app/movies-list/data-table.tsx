@@ -66,7 +66,7 @@ export function DataTable<TData, TValue>({
   const [movieListState , setMovieListState] = useRecoilState(movieListAtom)
 
   async function getFilteredData(filter:string) {
-    const {data} = await axios.post("http://localhost:3001/movie/filterRating",{filter})
+    const {data} = await axios.post("http://localhost:3001/movie/filter",{filter})
     setMovieListState(data.movieList)
   }
 
@@ -81,7 +81,6 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm text-center"
         />
-
 <Select onValueChange={(value)=>{
 
 getFilteredData(value)
